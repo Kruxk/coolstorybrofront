@@ -7,7 +7,7 @@ import {
 import { fetchHomepages } from "../../store/homePages/actions";
 import { Jumbotron } from "react-bootstrap";
 import Loading from "../Loading";
-import { Link } from "react-router-dom";
+import StyledDiv from "./StyledDiv";
 
 function Homepages() {
   const isLoading = useSelector(selectHomePagesloading);
@@ -23,25 +23,17 @@ function Homepages() {
       {isLoading ? (
         <Loading />
       ) : (
-        <Jumbotron>
+        <Jumbotron style={{ background: "#bca7b5" }}>
           {homepages.map((homepage) => (
-            <div
-              style={{
-                color: homepage.color,
-                background: homepage.backgroundColor,
-                width: "500px",
-                margin: "10px auto 10px auto",
-                textAlign: "left",
-                padding: "15px",
-              }}
+            <StyledDiv
+              color={homepage.color}
+              background={homepage.backgroundColor}
+              width={"500px"}
+              title={homepage.title}
+              description={homepage.description}
               key={homepage.id}
-            >
-              <h3>{homepage.title}</h3>
-              <p>{homepage.description}</p>
-              <Link to={`/homepages/${homepage.id}`}>
-                <button>Visit page</button>
-              </Link>
-            </div>
+              id={homepage.id}
+            />
           ))}
         </Jumbotron>
       )}
